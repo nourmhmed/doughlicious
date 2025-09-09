@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Doughlicious | Shop All</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: #fffaf0;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #e67e22;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #f1c40f;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #e67e22;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e67e22;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+            color: #e67e22;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #f1c40f;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            gap: 1rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin: 0 2rem 2rem;
+        }
+
+        .controls input[type="text"] {
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            flex: 1;
+            min-width: 200px;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s;
+        }
+
+        .controls input[type="text"]:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .controls input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #e67e22;
+        }
+
+        .controls select {
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s;
+        }
+
+        .controls select:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        .products {
+            padding: 0 2rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product {
+            border: 1px solid #f8d7b4;
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            background: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product h3 {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: #333;
+            min-height: 2.8rem;
+        }
+
+        .price {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background: #e67e22;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+
+        .btn.sold-out {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .btn.sold-out:hover {
+            background: #7f8c8d;
+            transform: none;
+        }
+
+        .availability {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            background: #f8f9fa;
+        }
+
+        .available {
+            color: #27ae60;
+        }
+
+        .unavailable {
+            color: #e74c3c;
+        }
+
+        footer {
+            background: #34495e;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-icons {
+            margin: 1.5rem 0;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #f1c40f;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 900px) {
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .controls input[type="text"] {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-cookie-bite"></i> Doughlicious
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop All</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Shop All Products</h1>
+
+    <!-- Controls -->
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search products...">
+        <label>
+            <input type="checkbox" id="in-stock-filter" checked> In Stock Only
+        </label>
+        <select id="sort-select">
+            <option value="default">Featured</option>
+            <option value="name-asc">Name, A-Z</option>
+            <option value="price-asc">Price, Low to High</option>
+            <option value="price-desc">Price, High to Low</option>
+        </select>
+    </div>
+
+    <!-- Products -->
+    <section class="products" id="product-list"></section>
+
+    <footer>
+        <div class="footer-content">
+            <p>Freshly baked cookies made with love and the finest ingredients</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p>© 2025 Doughlicious. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { 
+                name: "The Famous Five", 
+                price: 325, 
+                img: "https://media.cnn.com/api/v1/images/stellar/prod/181127110351-18-50-sweets-travel-tiramisu.jpg?q=w_1110,c_fill", 
+                available: true 
+            },
+            { 
+                name: "The Doughlicious Box", 
+                price: 300, 
+                img: "https://www.doughliciouseg.com/cdn/shop/files/WhatsAppImage2025-08-20at16.23.24.jpg?v=1755696242&width=533", 
+                available: true 
+            },
+            { 
+                name: "Classic Cookie", 
+                price: 65, 
+                img: "https://img.freepik.com/free-photo/cookies-assortment-top-view_23-2149021976.jpg?t=st=1757452540~exp=1757456140~hmac=d3ef4226a2ad6b7063e180c22763269f5774da4702450c29d5f3b46053376981&w=1480", 
+                available: true 
+            },
+            { 
+                name: "Pistachio Cookie", 
+                price: 75, 
+                img: "https://img.freepik.com/free-photo/delicious-cookies-arrangement_23-2150684200.jpg?t=st=1757452652~exp=1757456252~hmac=498faf006bec006012c59a2e944e6e64c12d744dfbf33b305284527eda6b67b9&w=1060", 
+                available: true 
+            },
+            { 
+                name: "Red Velvet Cookie", 
+                price: 70, 
+                img: "https://img.freepik.com/free-photo/delicious-pink-cookies-arrangement_23-2150707187.jpg?t=st=1757452698~exp=1757456298~hmac=61a6073561e991f695cfc4a813c2d63ea744e1380d2d741c62dfab8d43ebb558&w=1060", 
+                available: true 
+            },
+            { 
+                name: "Double Chocolate Cookie", 
+                price: 65, 
+                img: "https://images.unsplash.com/photo-1623334044303-241021148842?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400&q=80", 
+                available: true 
+            },
+            { 
+                name: "M&Ms Cookie", 
+                price: 75, 
+                img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400&q=80", 
+                available: true 
+            },
+            { 
+                name: "Lotus Cookie", 
+                price: 75, 
+                img: "https://img.freepik.com/free-photo/close-up-photo-pile-jam-cookies-wooden-bowl_114579-51157.jpg?t=st=1757452778~exp=1757456378~hmac=03d3e7211fcd0cc9725542acd1464bcbd35ed50fed0845a669ba5a7483f2a63c&w=1060", 
+                available: true 
+            },
+            { 
+                name: "Kinder Bueno Cookie", 
+                price: 75, 
+                img: "https://img.freepik.com/free-psd/delicious-chocolate-chunk-cookie-sweet-treat_632498-24801.jpg?t=st=1757452829~exp=1757456429~hmac=8c567edb2403dd1a2fec6d682e8fdf2fd4b66608e9046abef3a21073cdacb66b&w=1060", 
+                available: true 
+            },
+            { 
+                name: "Raffaello Cookie", 
+                price: 85, 
+                img: "https://img.freepik.com/free-photo/raw-homemade-vegan-chocolate-coconut-dessert-healthy-vegan-food-concept_114579-9822.jpg?t=st=1757452867~exp=1757456467~hmac=228cd54fb42cedc725390919b23c43231b61d3afeb5018362c2905d8e7daef77&w=1060", 
+                available: true 
+            },
+            { 
+                name: "Cookies 'N Cream", 
+                price: 85, 
+                img: "https://img.freepik.com/free-photo/high-angle-delicious-cookies-arrangement_52683-93713.jpg?t=st=1757452928~exp=1757456528~hmac=665555246b8713be6c36732fff3d3a02e2f3d89bf036b42dbe1fe4eba071180a&w=1060", 
+                available: false 
+            }
+        ];
+
+        const listEl = document.getElementById("product-list");
+        const filterEl = document.getElementById("in-stock-filter");
+        const sortEl = document.getElementById("sort-select");
+        const searchEl = document.getElementById("search");
+
+        function render() {
+            let items = [...products];
+
+            // Filter by availability
+            if (filterEl.checked) {
+                items = items.filter(p => p.available);
+            }
+
+            // Search filter
+            const searchText = searchEl.value.toLowerCase();
+            if (searchText) {
+                items = items.filter(p => p.name.toLowerCase().includes(searchText));
+            }
+
+            // Sorting
+            const sortVal = sortEl.value;
+            if (sortVal === "name-asc") {
+                items.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortVal === "price-asc") {
+                items.sort((a, b) => a.price - b.price);
+            } else if (sortVal === "price-desc") {
+                items.sort((a, b) => b.price - a.price);
+            }
+
+            // Render
+            listEl.innerHTML = "";
+            if (items.length === 0) {
+                listEl.innerHTML = "<p style='grid-column:1/-1; text-align:center; padding: 2rem; font-size: 1.2rem;'>No products found. Try adjusting your search filters.</p>";
+                return;
+            }
+            
+            items.forEach(p => {
+                const div = document.createElement("div");
+                div.className = "product";
+                div.innerHTML = `
+                    <div class="product-image">
+                        <img src="${p.img}" alt="${p.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <p class="price">LE ${p.price}.00 EGP</p>
+                        <button class="btn ${p.available ? '' : 'sold-out'}">
+                            <i class="fas ${p.available ? 'fa-shopping-cart' : 'fa-times'}"></i>
+                            ${p.available ? 'Add to Cart' : 'Sold Out'}
+                        </button>
+                        <div class="availability ${p.available ? 'available' : 'unavailable'}">
+                            <i class="fas ${p.available ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            ${p.available ? 'In Stock' : 'Out of Stock'}
+                        </div>
+                    </div>
+                `;
+                listEl.appendChild(div);
+            });
+        }
+
+        filterEl.addEventListener("change", render);
+        sortEl.addEventListener("change", render);
+        searchEl.addEventListener("input", render);
+
+        // Initial render
+        render();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Doughlicious</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fffaf0;
+            color: #5a3921;
+            line-height: 1.6;
+        }
+
+        .announcement {
+            background: #f9f3e9;
+            text-align: center;
+            padding: 0.7rem;
+            font-size: 0.95rem;
+            color: #8b5a2b;
+            border-bottom: 1px solid #f1e6d6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #e67e22;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #f1c40f;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        nav a:hover {
+            color: #e67e22;
+            background: #f9f3e9;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e67e22;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 2rem 0 3rem;
+            color: #8b5a2b;
+            font-size: 2.8rem;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #d9a566;
+            border-radius: 2px;
+        }
+
+        /* About Page Styles */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            padding-right: 1.5rem;
+        }
+
+        .about-text h2 {
+            color: #8b5a2b;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .values-section {
+            background: #f9f3e9;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            color: #8b5a2b;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: #d9a566;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            color: #8b5a2b;
+            margin-bottom: 1rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin: 4rem 0;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            color: #8b5a2b;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-info h3 {
+            color: #8b5a2b;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: #d9a566;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #5a3921;
+            color: #f1e6d6;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-subscribe {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-subscribe input[type=email] {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            flex: 1;
+            min-width: 250px;
+            font-size: 1rem;
+        }
+
+        .footer-subscribe input[type=email]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #d9a566;
+        }
+
+        .footer-subscribe button {
+            padding: 1rem 2rem;
+            border: none;
+            background: #d9a566;
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-subscribe button:hover {
+            background: #c28d4c;
+        }
+
+        .social-icons {
+            margin: 2.5rem 0;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+        }
+
+        .social-icons a {
+            color: #f1e6d6;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #d9a566;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #7a5b3a;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-text {
+                padding-right: 0;
+            }
+            
+            .values-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1.2rem;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .page-header {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                font-size: 2rem;
+            }
+            
+            .footer-subscribe {
+                flex-direction: column;
+            }
+            
+            .footer-subscribe input[type=email] {
+                min-width: 100%;
+            }
+            
+            .about-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-cookie-bite"></i> Doughlicious
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop All</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <h1 class="page-header">About Us</h1>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Doughlicious was born from a passion for baking and sharing happiness. What started as a small home kitchen experiment in 2015 has grown into a beloved local bakery known for our delicious, handcrafted cookies.</p>
+                <p>Our founder, Sarah, began baking cookies as a way to bring joy to friends and family during the holidays. The response was so overwhelming that she decided to turn her passion into a business.</p>
+                <p>Today, we're proud to serve thousands of happy customers across Egypt, all while maintaining the same commitment to quality, freshness, and love that went into those first batches of cookies.</p>
+                <p>Every cookie we make is crafted with care, using only the finest ingredients and traditional baking methods that ensure each bite is a moment of pure delight.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400&q=80" alt="Our bakery">
+            </div>
+        </div>
+        
+        <div class="values-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Made with Love</h3>
+                    <p>Every cookie is crafted with care and attention to detail, using recipes developed over years of perfecting our craft.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Quality Ingredients</h3>
+                    <p>We source only the finest ingredients, prioritizing local and sustainable options whenever possible.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Focused</h3>
+                    <p>We believe in supporting our local community and creating connections through the joy of baking.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We never compromise on quality and always strive to exceed our customers' expectations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Stay Connected</h3>
+            <p>Subscribe to our newsletter for updates, special offers, and baking tips!</p>
+            <form class="footer-subscribe" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p class="copyright">© 2023 Doughlicious. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
