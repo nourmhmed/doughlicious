@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doughlicious Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: #fff;
+        }
+
+        .announcement {
+            background: #f4e1e1;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #d35400;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #d35400;
+        }
+
+        /* Hero Slideshow */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            height: 600px;
+            /* adjust as needed */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .slide-1 {
+            background-image: url('https://www.mashed.com/img/gallery/always-do-this-before-eating-freshly-baked-bread/l-intro-1634670823.jpg');
+        }
+
+        .slide-2 {
+            background-image: url('https://img.freepik.com/free-photo/front-view-delicious-chocolate-cake_23-2148549948.jpg?t=st=1757424631~exp=1757428231~hmac=12d6085c29c75171afe39d421e1e508ee1626d2de6b81d5c91bf0b3ace45a4b3&w=1480');
+        }
+
+        .slide-3 {
+            background-image: url('https://img.freepik.com/free-photo/top-view-beautiful-valentine-s-day-concept_23-2148804132.jpg?t=st=1757424722~exp=1757428322~hmac=0383711394004c772531dcfe23ce20612c29e81deac5029ccb92938ef97885b7&w=1060');
+        }
+
+
+        .hero-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.6;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            opacity: 1;
+            background: #d35400;
+        }
+
+        /* Products */
+        .products {
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .product {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product h3 {
+            margin: 0.5rem 0;
+        }
+
+        .price {
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #d35400;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #b54300;
+        }
+
+        .btn.sold-out {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* Story */
+        .story {
+            padding: 3rem 2rem;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .story h2 {
+            margin-bottom: 1rem;
+        }
+
+        .story p {
+            max-width: 700px;
+            margin: auto;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer form {
+            margin-top: 1rem;
+        }
+
+        footer input[type=email] {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+        }
+
+        footer button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #d35400;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer .social {
+            margin-top: 1rem;
+        }
+
+        footer .social a {
+            margin: 0 0.5rem;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="announcement">Next day delivery / Free Shipping for orders over 500 EGP</div>
+
+    <header>
+        <div class="logo">Doughlicious</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop All</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Slideshow -->
+    <section class="hero">
+        <div class="slides" id="slides">
+            <div class="slide slide-1">
+                <span>Freshly Baked</span>
+            </div>
+            <div class="slide slide-2">
+                <span>Delicious Treats</span>
+            </div>
+            <div class="slide slide-3">
+                <span>Made With Love</span>
+            </div>
+        </div>
+        <div class="hero-controls" id="dots"></div>
+    </section>
+
+
+    <!-- Products -->
+    <section class="products" id="product-list"></section>
+
+    <!-- Our Story -->
+    <section class="story">
+        <h2>Our Story</h2>
+        <p>Doughlicious was born from a passion for baking and sharing happiness. Every cookie is made with high-quality
+            ingredients, inspired by homemade flavors and baked with care.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Stay Connected</h3>
+        <form onsubmit="event.preventDefault(); alert('Subscribed!');">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <div class="social">
+            <a href="#">Instagram</a> |
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a>
+        </div>
+        <p style="margin-top:1rem;">© 2025 Doughlicious Prototype</p>
+    </footer>
+
+    <script>
+        /* Slideshow */
+        const slides = document.getElementById("slides");
+        const dotsContainer = document.getElementById("dots");
+        const totalSlides = slides.children.length;
+        let current = 0;
+
+        function renderDots() {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement("div");
+                dot.classList.add("dot");
+                if (i === 0) dot.classList.add("active");
+                dot.addEventListener("click", () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+        function goToSlide(n) {
+            current = n;
+            slides.style.transform = `translateX(-${n * 100}%)`;
+            document.querySelectorAll(".dot").forEach((d, i) => d.classList.toggle("active", i === n));
+        }
+        function autoSlide() {
+            current = (current + 1) % totalSlides;
+            goToSlide(current);
+        }
+        renderDots();
+        setInterval(autoSlide, 4000);
+
+        /* Products */
+        const products = [
+            { name: "Chocolate Chip Cookies", price: "120 EGP", img: "https://handletheheat.com/wp-content/uploads/2020/10/BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9-637x637-1.jpg", available: true },
+            { name: "Oatmeal Raisin Cookies", price: "100 EGP", img: "https://www.rainbownourishments.com/wp-content/uploads/2023/08/vegan-oatmeal-raisin-cookies-1.jpg", available: true },
+            { name: "Red Velvet Cookies", price: "150 EGP", img: "https://sallysbakingaddiction.com/wp-content/uploads/2013/12/red-velvet-cookies.jpg", available: false },
+            { name: "Brownie Bites", price: "180 EGP", img: "https://richanddelish.com/wp-content/uploads/2022/10/brownie-bites.jpg", available: true }
+        ];
+
+        const productList = document.getElementById("product-list");
+        products.forEach(p => {
+            const div = document.createElement("div");
+            div.className = "product";
+            div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="price">${p.price}</p>
+        <button class="btn ${p.available ? '' : 'sold-out'}">${p.available ? 'Add to Cart' : 'Sold Out'}</button>
+      `;
+            productList.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>
